@@ -114,7 +114,7 @@ class BaseBot(ABC):
         initial_q_max = initial_state_predictions[action]
         next_q_max = next_state_predictions[np.argmax(next_state_predictions)]
         q_current = (1 - self._bot_args['alpha']) * initial_q_max
-        q_future = self._bot_args['alpha'] * (reward * self._bot_args['gamma'] * next_q_max)
+        q_future = self._bot_args['alpha'] * (reward + self._bot_args['gamma'] * next_q_max)
         return q_current + q_future
 
     def _calc_reward(self, reward_args):
